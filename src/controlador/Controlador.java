@@ -57,7 +57,7 @@ public class Controlador implements ActionListener {
 			} else if (((JMenuItem) opcion).equals(vistaPrincipal.getMntmShow())) {
 				log.print("getMntmShow");
 				ArrayList<EjObjeto> lista = persistencia.obtenerLista();
-				panelShow.rellenarTabla(lista);
+				panelShow.setDatos(lista);
 				vistaPrincipal.definirPanel(panelShow);	
 			}
 		} else if(opcion instanceof JButton) {		//BOTONES
@@ -68,6 +68,11 @@ public class Controlador implements ActionListener {
 				irModificar();
 			} else if (((JButton) opcion).equals(panelShow.getBtnEliminar())) {		//Eliminar
 				eliminar(persistencia);								
+			} else if (((JButton) opcion).equals(panelShow.getBtnFiltrar())) {		//Filtrar
+				String filtro = panelShow.getTxtFiltro();
+				log.iniFunc("Filtrar", filtro);
+				ArrayList<EjObjeto> lista = panelShow.getListaEjObjeto(filtro);
+				panelShow.rellenarTabla(lista);					
 			}
 		}
 
